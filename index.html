@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DAX</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="logo">🚚</div>
+      <div>
+        <h1>DAX</h1>
+        <div class="sub">Быстрая доставка по Конаеву</div>
+      </div>
+    </div>
+
+    <div class="top-controls">
+      <button id="langBtn" class="lang-btn" aria-label="Сменить язык">
+        <span class="lang-text">КЗ</span>
+        <span class="lang-flag">🇰🇿</span>
+      </button>
+      <a id="waTop" href="https://wa.me/77473522909" target="_blank" class="support-link">
+        <span class="wa-icon">💬</span>
+        Поддержка
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="card order-card" aria-labelledby="orderTitle">
+      <div class="card-header">
+        <h2 id="orderTitle">Оформление заказа</h2>
+        <div class="step-indicator">Шаг 1 из 2</div>
+      </div>
+
+      <!-- From Address -->
+      <div class="form-section">
+        <label class="lbl">📍 Откуда забрать</label>
+        <input id="fromAddress" type="text" placeholder="Улица, район, ориентир" required>
+        
+        <div class="row">
+          <div class="input-group">
+            <input id="fromHouse" type="text" placeholder="Дом" required>
+          </div>
+          <div class="input-group">
+            <input id="fromApt" type="text" placeholder="Кв.">
+          </div>
+          <div class="input-group">
+            <input id="fromFloor" type="number" min="0" placeholder="Этаж">
+          </div>
+        </div>
+        
+        <!-- Имя отправителя -->
+        <div style="margin-top: 12px;">
+          <input id="senderName" type="text" placeholder="Имя отправителя (необязательно)" style="width: 100%;">
+        </div>
+      </div>
+
+      <!-- To Address -->
+      <div class="form-section">
+        <label class="lbl">🎯 Куда доставить</label>
+        <input id="toAddress" type="text" placeholder="Улица, район, ориентир" required>
+        
+        <div class="row">
+          <div class="input-group">
+            <input id="toHouse" type="text" placeholder="Дом" required>
+          </div>
+          <div class="input-group">
+            <input id="toApt" type="text" placeholder="Кв.">
+          </div>
+          <div class="input-group">
+            <input id="toFloor" type="number" min="0" placeholder="Этаж">
+          </div>
+        </div>
+        
+        <!-- Имя получателя -->
+        <div style="margin-top: 12px;">
+          <input id="receiverName" type="text" placeholder="Имя получателя (необязательно)" style="width: 100%;">
+        </div>
+      </div>
+
+      <!-- Package Info -->
+      <div class="form-section">
+        <label class="lbl">📦 Информация о товаре</label>
+        <!-- Название товара -->
+        <input id="productName" type="text" placeholder="Название товара (например: Документы, Еда, Одежда)" 
+               style="width: 100%; margin-bottom: 12px;">
+        
+        <input id="size" type="text" placeholder="Размеры (например: 50×40×30 см)" class="size-input">
+        
+        <!-- Убрана секция загрузки фото -->
+      </div>
+
+      <!-- Contact -->
+      <div class="form-section">
+        <label class="lbl">📞 Контактный телефон</label>
+        <input id="phone" type="tel" placeholder="+7 7xx xxx xx xx" required class="phone-input">
+      </div>
+
+      <!-- Price Calculation -->
+      <div class="price-section">
+        <button id="calcBtn" class="btn calc-btn">
+          <span class="btn-icon">💰</span>
+          Рассчитать стоимость
+        </button>
+        <div id="priceLabel" class="price-display">
+          <div class="price-amount">—</div>
+          <div class="price-label">стоимость доставки</div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="map-section">
+        <div class="map-header">
+        </div>
+        <div id="map" class="map"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="sendOrder" class="btn primary order-btn">
+          <span class="btn-icon">🚀</span>
+          Перейти к заказу
+        </button>
+        <div class="action-note">
+          СОЗДАТЬ ЗАКАЗ
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions">
+        <h3>Как это работает:</h3>
+        <div class="steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            Заполните форму и рассчитайте стоимость
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            Нажмите кнопку отправки
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+          СОЗДАТЬ ЗАКАЗ
+          </div>
+          <div class="step">
+            <span class="step-number">4</span>
+            Подтвердите заказ в чате с оператором
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <div class="footer-logo">DAX</div>
+        <div class="footer-contacts">
+          <div>📞 +7 747 238 4417</div>
+          <div>🕒 Ежедневно 10:00-22:00</div>
+        </div>
+      </div>
+      <div class="footer-copy">
+        Лучшие сервисы  
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
